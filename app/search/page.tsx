@@ -6,7 +6,6 @@ interface SearchParams {
   city?: string;
   cuisine?: string;
   price?: PRICE;
-  searchParams: SearchParams;
 }
 const prisma = new PrismaClient();
 const fetchRestaurantsByCity = (searchParams: SearchParams) => {
@@ -42,6 +41,7 @@ const fetchRestaurantsByCity = (searchParams: SearchParams) => {
     slug: true,
     location: true,
     price: true,
+    reviews: true,
   };
 
   return prisma.restaurant.findMany({
