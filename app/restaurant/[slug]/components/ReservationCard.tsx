@@ -1,4 +1,5 @@
 "use client";
+import { partySize } from "../../../../data";
 export default function ReservationCard() {
   return (
     <div className="fixed w-[15%] bg-white rounded p-3 shadow">
@@ -8,8 +9,9 @@ export default function ReservationCard() {
       <div className="my-3 flex flex-col">
         <label htmlFor="">Party size</label>
         <select name="" className="py-3 border-b font-light bg-white" id="">
-          <option value="">1 person</option>
-          <option value="">2 people</option>
+          {partySize.map((size) => (
+            <option value={size.value}>{size.label}</option>
+          ))}
         </select>
       </div>
       <div className="flex justify-between ">
