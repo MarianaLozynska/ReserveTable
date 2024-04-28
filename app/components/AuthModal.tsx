@@ -124,7 +124,7 @@ export default function AuthModal({ isSignin }: { isSignin: boolean }) {
                 <h2 className="text-2xl text-black font-light text-center">
                   {renderContent(
                     "Log Into Your Account",
-                    "Create Your ReserveTable account"
+                    "Create Your account"
                   )}
                 </h2>
                 <AuthModalInputs
