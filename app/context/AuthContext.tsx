@@ -1,6 +1,9 @@
 "use client";
 import { error } from "console";
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
+import useAuth from "../../hooks/useAuth";
+import { getCookie } from "cookies-next";
+import axios from "axios";
 interface User {
   id: number;
   firstName: string;
@@ -36,8 +39,35 @@ export default function AuthContext({
     data: null,
     error: null,
   });
-  const [] = useState();
-  const [] = useState();
+
+  const fetchUser = async () => {
+    setAuthState({ loading: true, data: null, error: null });
+    try {
+      const jwt = getCookie("jwt");
+      if (!jwt) {
+        return setAuthState({ loading: false, data: null, error: null });
+      }
+      const response = await axios.get("http://localhost:3000/api/auth/me", {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+      axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
+
+      setAuthState({ loading: false, data: response.data, error: null });
+    } catch (error: any) {
+      setAuthState({
+        loading: false,
+        data: null,
+        error: error.response.data.errorMessage,
+      });
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
     <AuthenticationContext.Provider value={{ ...authState, setAuthState }}>
       {children}
