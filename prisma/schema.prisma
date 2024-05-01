@@ -28,7 +28,7 @@ model Restaurant {
   reviews     Review[]
   created_at  DateTime  @default(now())
   updated_at  DateTime  @updatedAt
-  Bookings    Booking[]
+  bookings    Booking[]
   tables      Table[]
 }
 
@@ -95,7 +95,7 @@ model User {
 model Booking {
   id                Int                @id @default(autoincrement())
   number_of_people  Int
-  bookin_time       DateTime
+  booking_time      DateTime
   booker_email      String
   booker_phone      String
   booker_first_name String
@@ -112,8 +112,8 @@ model Booking {
 model Table {
   id            Int                @id @default(autoincrement())
   seats         Int
-  restaurant_id Int
   bookings      BookingsOnTables[]
+  restaurant_id Int
   restaurant    Restaurant         @relation(fields: [restaurant_id], references: [id])
   created_at    DateTime           @default(now())
   updated_at    DateTime           @updatedAt
