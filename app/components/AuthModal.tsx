@@ -47,6 +47,7 @@ export default function AuthModal({ isSignin }: { isSignin: boolean }) {
     password: "",
   });
   const [disabled, setDisabled] = useState(true);
+
   useEffect(() => {
     if (isSignin) {
       if (inputs.password && inputs.email) {
