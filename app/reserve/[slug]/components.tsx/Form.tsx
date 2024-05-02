@@ -65,7 +65,7 @@ export default function Form({
       bookerRequests: inputs.bookerRequests,
       setDidBook,
     });
-    // return booking;
+    return booking;
   };
 
   return (
